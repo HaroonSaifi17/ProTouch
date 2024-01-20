@@ -3,7 +3,7 @@
     <div class="relative z-[200]">
       <a href="#home" class="flex items-center">
       <i class="fa-solid text-violet-800 fa-building-shield mr-2"></i>
-        <span class="text-xs font-semibold">ProTouch</span>
+        <span class="text-sm text-violet-950 font-semibold">ProTouch</span>
       </a>
     </div>
     <div [style.width]="navStatus ? '100vw' : '0px'" (click)="toggleClass(list)"
@@ -13,13 +13,10 @@
       <ul
         class="flex text-sm max-sm:flex-col max-sm:w-full max-sm:justify-start max-sm:items-stretch max-sm:h-full max-sm:py-20 max-sm:pt-[20vh] max-sm:px-4 max-sm:space-y-5">
         <li >
-          <a routerLink="/" (click)="toggleClass(list)" routerLinkActive="active" class="m-1 p-2">Home</a>
+          <a routerLink="/" (click)="toggleClass(list)"  class="m-1 p-2">Home</a>
         </li>
         <li >
-          <a (click)="navigate('#about'); toggleClass(list)" class="m-1 p-2">About</a>
-        </li>
-        <li >
-          <a (click)="navigate('#services'); toggleClass(list)" class="m-1 p-2">Services</a>
+          <a (click)=" toggleClass(list)" routerLink="/services" routerLinkActive="active" class="m-1 p-2">Services</a>
         </li>
         <li >
           <a (click)="navigate('#contact'); toggleClass(list)" class="m-1 p-2">Contact</a>
@@ -27,7 +24,16 @@
         <li >
           <a (click)="adminLogin(); toggleClass(list)" class="m-1 p-2">Admin</a>
         </li>
+        <li >
+          <a (click)=" toggleClass(list)" routerLinkActive="active" routerLink="/check" class="m-1 p-2">Check Status</a>
+        </li>
       </ul>
+    </div>
+    <div class="max-sm:ml-auto">
+      <a routerLink="/cart">
+      <i
+      class="fa-solid p-2 text-gray-600 fa-lg fa-cart-shopping"></i>
+      </a>
     </div>
     <div class="ml-2 block sm:hidden h-[30px] aspect-square my-auto z-50">
       <a (click)=" toggleClass(list)" class="flex flex-col justify-around items-end h-full w-full">
