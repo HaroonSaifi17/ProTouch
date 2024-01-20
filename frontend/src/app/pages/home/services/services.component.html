@@ -1,1 +1,10 @@
-<p>services works!</p>
+<div class="w-[100vw]">
+  <div class="px-[5vw] mx-auto max-w-screen-2xl ">
+    <h2 class="font-semibold text-3xl text-violet-800">Services</h2>
+     <div *ngIf="services | async as services">
+       <a *ngFor="let service of services" class="">
+        <img [src]="apiUrl + '/api/image/' + service.img" alt="">
+      </a>
+    </div>
+  </div>
+</div>
