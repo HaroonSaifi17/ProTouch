@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import ServiceModel from "./../models/services";
 const router = express.Router();
 import multer from "multer";
+import ProductModel from "../models/product";
 
 const storage = multer.diskStorage({
   destination: function (
@@ -29,7 +30,6 @@ router.post(
   upload.single("img"),
   async (req: Request, res: Response) => {
     try {
-      console.log(req.file)
       const { name, description } = req.body;
       const service = new ServiceModel({
         img: req.file?.filename,
@@ -40,6 +40,33 @@ router.post(
       await service.save();
 
       res.status(201).json({ message: "Added successfully", service });
+    } catch (err: any) {
+      res.status(500).json({ message: "Failed to add", error: err.message });
+    }
+  },
+);
+router.post(
+  "/addProduct",
+  upload.single("img"),
+  async (req: Request, res: Response) => {
+    try {
+      const { name, description, id, price } = req.body;
+      const product = new ProductModel({
+        img: req.file?.filename,
+        name,
+        description,
+        price: parseInt(price),
+      });
+
+      await product.save();
+      const productId = product._id.toString();
+      await ServiceModel.findByIdAndUpdate(
+        id,
+        { $push: { products: productId } },
+        { new: true },
+      );
+
+      res.status(201).json({ message: "Added successfully" });
     } catch (err: any) {
       res.status(500).json({ message: "Failed to add", error: err.message });
     }

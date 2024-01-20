@@ -4,12 +4,32 @@ import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getService(): Observable<[{ name: string, description: string, img: string, product: string[] }]> {
-    return this.http.get<[{ name: string, description: string, img: string, product: string[] }]>(environment.apiUrl + '/api/getService');    }
+  getService(): Observable<
+    [
+      {
+        name: string;
+        description: string;
+        img: string;
+        _id: string;
+        product: string[];
+      },
+    ]
+  > {
+    return this.http.get<
+      [
+        {
+          name: string;
+          description: string;
+          img: string;
+          _id: string;
+          product: string[];
+        },
+      ]
+    >(environment.apiUrl + '/api/getService');
+  }
 }
-

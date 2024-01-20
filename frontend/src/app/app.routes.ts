@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HeroSectionComponent } from './pages/home/hero-section/hero-section.component';
 import { ServicesComponent } from './pages/home/services/services.component';
+import { ProductComponent } from './pages/home/product/product.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
       {
         path: 'services',
         component: ServicesComponent,
+      },
+      {
+        path: 'product/:id',
+        component: ProductComponent,
       },
     ],
   },
