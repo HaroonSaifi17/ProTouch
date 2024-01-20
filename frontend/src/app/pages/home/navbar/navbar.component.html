@@ -1,9 +1,9 @@
-<div id="home" class="bg-violet-50 main">
+<div id="home" class="bg-violet-200 main">
   <nav class="max-w-screen-2xl flex p-4 justify-between mx-auto items-center">
     <div class="relative z-[200]">
       <a routerLink="/" class="flex items-center">
       <i class="fa-solid text-violet-800 fa-building-shield mr-2"></i>
-        <span class="text-sm text-violet-950 font-semibold">ProTouch</span>
+        <span class="text-sm text-violet-800 font-semibold">ProTouch</span>
       </a>
     </div>
     <div [style.width]="navStatus ? '100vw' : '0px'" (click)="toggleClass(list)"
@@ -31,13 +31,13 @@
     </div>
     <div class="max-sm:ml-auto">
       <a routerLink="/cart">
-        <i class="fa-solid p-2 text-gray-600 fa-lg fa-bag-shopping"></i>
+        <i class="fa-solid p-2 text-violet-800 fa-lg fa-bag-shopping"></i>
       </a>
     </div>
     <div class="ml-2 block sm:hidden h-[30px] aspect-square my-auto z-50">
       <a (click)=" toggleClass(list)" class="flex flex-col justify-around items-end h-full w-full">
-        <div [class.open1]="navStatus" class="h-[5px] w-full bg-gray-700 rounded-full duration-300"></div>
-        <div [class.open2]="navStatus" class="h-[5px] w-2/3 bg-gray-700 rounded-full duration-300"></div>
+        <div [class.open1]="navStatus" class="h-[5px] w-full bg-violet-800 rounded-full duration-300"></div>
+        <div [class.open2]="navStatus" class="h-[5px] w-2/3 bg-violet-800 rounded-full duration-300"></div>
       </a>
     </div>
   </nav>

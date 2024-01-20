@@ -33,7 +33,7 @@ router.get("/getProduct/:id", async (req: Request, res: Response) => {
       throw new Error("Missing ID parameter");
     }
     const services = await ServiceModel.findById(id).select("products");
-    const productDetails = await Promise.all(
+    let productDetails = await Promise.all(
       services!.products.map(async (productId) => {
         const product = await ProductModel.findById(productId);
         if (!product) {
@@ -42,6 +42,9 @@ router.get("/getProduct/:id", async (req: Request, res: Response) => {
         return product;
       }),
     );
+    productDetails.forEach((product) => {
+      product._id = product._id.toString();
+    });
     res.status(200).json(productDetails);
   } catch (error: any) {
     res.status(401).send(error.message).end();

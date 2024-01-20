@@ -32,4 +32,27 @@ export class ApiService {
       ]
     >(environment.apiUrl + '/api/getService');
   }
+  getProduct(id: string): Observable<
+    [
+      {
+        name: string;
+        description: string;
+        img: string;
+        _id: string;
+        price: string;
+      },
+    ]
+  > {
+    return this.http.get<
+      [
+        {
+          name: string;
+          description: string;
+          img: string;
+          _id: string;
+          price: string;
+        },
+      ]
+    >(environment.apiUrl + '/api/getProduct/' + id);
+  }
 }

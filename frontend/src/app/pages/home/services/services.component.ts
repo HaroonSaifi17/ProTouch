@@ -17,7 +17,7 @@ export class ServicesComponent implements OnInit {
     private router: Router,
     private api: ApiService,
   ) {}
-  services:
+  services$:
     | Observable<
         [
           {
@@ -31,7 +31,7 @@ export class ServicesComponent implements OnInit {
     | undefined;
   apiUrl = environment.apiUrl;
   ngOnInit(): void {
-    this.services = this.api.getService();
+    this.services$ = this.api.getService();
   }
   navigateProduct(id: string): void {
     this.router.navigate(['/product/' + id]);
