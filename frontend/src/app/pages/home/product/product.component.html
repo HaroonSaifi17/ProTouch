@@ -2,11 +2,11 @@
   <div class="px-[5vw] mx-auto py-8 max-w-screen-2xl">
     <a class="p-3 rounded-full bg-violet-200 text-violet-800" routerLink="/services"><i
         class="fa-solid fa-arrow-left mr-2"></i>Back</a>
-    <h3 class="py-5 font-semibold text-4xl">Products</h3>
-    <div class="flex justify-center flex-wrap gap-5" *ngIf="products$ | async as products">
+    <h3 class="py-5 font-semibold text-4xl"*ngIf="products$ | async as products">{{products.name}} Products</h3>
+    <div class="flex justify-center flex-wrap gap-5" *ngIf="products$ | async as products;else loading">
       <div
         class="max-md:min-w-[300px] md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl overflow-hidden bg-white"
-        *ngFor="let product of products">
+        *ngFor="let product of products.products">
         <img class="aspect-[3/2] object-cover" [src]="apiUrl + '/api/image/' + product.img" alt="" />
         <div class="p-4 border-t border-gray-300">
           <p class="text-xl font-semibold">
@@ -15,12 +15,46 @@
           </p>
           <p class="text-gray-700">{{ product.description }}</p>
           <div class="text-xl my-3 font-semibold text-gray-700">
-            <span class="text-gray-800 text-2xl">Price:</span> {{ product.price }}&#x20b9;
+            <span class="text-gray-800 text-2xl">Price:</span>
+            {{ product.price }}&#x20b9;
           </div>
-          <a class="w-full py-2 hover:bg-violet-600 rounded-md inline-block text-center mt-3 bg-violet-700 text-white">Add
+          <a #ff (click)="addToCart(product.name, product.price, product._id, ff,products.name)"
+            class="w-full py-2 hover:bg-violet-600 rounded-md inline-block text-center mt-3 bg-violet-700 text-white">Add
             to Cart</a>
         </div>
       </div>
     </div>
+    <ng-template #loading>
+      <div class="flex  justify-center flex-wrap gap-5">
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

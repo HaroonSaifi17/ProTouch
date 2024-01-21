@@ -1,16 +1,48 @@
 <div class="w-[100vw]">
   <div class="px-[5vw] mx-auto py-8 max-w-screen-2xl ">
     <h2 class="font-semibold text-4xl mb-8 ">Services</h2>
-     <div class="flex justify-center flex-wrap gap-5" *ngIf="services$ | async as services">
-       <div class="max-md:min-w-[300px] md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl overflow-hidden bg-white" *ngFor="let service of services" >
+     <div class="flex justify-center flex-wrap gap-5" *ngIf="services$ | async as services;else loading">
+       <div class="max-md:min-w-[300px] md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl overflow-hidden bg-violet-100" *ngFor="let service of services" >
         <img class="aspect-[3/2] object-cover"  [src]="apiUrl + '/api/image/' + service.img" alt="">
           <div class="p-4 border-t border-gray-300">
 
-        <p class="text-xl font-semibold">{{service.name}}<i class="fa-solid ml-2 text-violet-800 fa-chevron-right"></i></p>
-        <p class="text-gray-700">{{service.description}}</p>
+        <p class="text-xl text-violet-900 font-semibold">{{service.name}}<i class="fa-solid ml-2 text-violet-800 fa-chevron-right"></i></p>
+        <p class="text-violet-800">{{service.description}}</p>
           <a (click)="navigateProduct(service._id)" class="w-full py-2 hover:bg-violet-600 rounded-md inline-block text-center mt-3 bg-violet-700 text-white">Select</a>
         </div>
       </div>
     </div>
+    <ng-template #loading>
+      <div class="flex  justify-center flex-wrap gap-5">
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border  rounded-xl overflow-hidden bg-gray-200" >
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

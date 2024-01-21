@@ -3,6 +3,7 @@ import ServiceModel from "./../models/services";
 const router = express.Router();
 import path from "path";
 import ProductModel from "../models/product";
+import OrderModel from "../models/order";
 
 router.get("/image/:url", async (req: Request, res: Response) => {
   try {
@@ -32,7 +33,7 @@ router.get("/getProduct/:id", async (req: Request, res: Response) => {
     if (!id) {
       throw new Error("Missing ID parameter");
     }
-    const services = await ServiceModel.findById(id).select("products");
+    const services = await ServiceModel.findById(id).select("products name");
     let productDetails = await Promise.all(
       services!.products.map(async (productId) => {
         const product = await ProductModel.findById(productId);
@@ -45,10 +46,30 @@ router.get("/getProduct/:id", async (req: Request, res: Response) => {
     productDetails.forEach((product) => {
       product._id = product._id.toString();
     });
-    res.status(200).json(productDetails);
+    res.status(200).json({products:productDetails,name:services?.name});
   } catch (error: any) {
     res.status(401).send(error.message).end();
   }
 });
+
+router.post(
+  "/book",
+  async (req: Request, res: Response) => {
+    try {
+      const { name, totalprice , number,orders } = req.body;
+      const items= JSON.parse(orders) 
+      const order=new OrderModel({
+        name:name,
+        number:number,
+        totalprice:totalprice,
+        items: items
+      })
+      await order.save() 
+      res.status(201).json({ id: order._id });
+    } catch (err: any) {
+      res.status(500).json({ message: "Failed to add", error: err.message });
+    }
+  },
+);
 
 export default router;

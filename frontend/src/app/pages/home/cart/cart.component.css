@@ -1,0 +1,10 @@
+.aspect-square1 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px; /* Set the desired width here */
+  height: 15px; /* Set the same height as the width to make it square */
+}
+.filter1{
+  backdrop-filter: blur(5px);
+}

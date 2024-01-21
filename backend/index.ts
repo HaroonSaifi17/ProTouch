@@ -12,6 +12,7 @@ app.use(cors({ origin: '*', optionsSuccessStatus: 200 }))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 require('./setup/mongoose')
+require('./setup/passport')
 
 app.use('/api', userRoutes);
 app.use('/admin', adminRoutes);

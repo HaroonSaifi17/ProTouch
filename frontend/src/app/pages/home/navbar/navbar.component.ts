@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ApiService } from '../../../api.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive],
+  imports: [RouterLink,RouterLinkActive,CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) { }
-  ngOnInit(): void { }
+  cartLength$:Observable<number>|undefined
+  constructor(private router: Router,private api:ApiService) { }
+  ngOnInit(): void {
+    this.cartLength$=this.api.getArrayLength()
+  }
   public navStatus: boolean = false
   toggleClass(list: HTMLDivElement): void {
     if(window.innerWidth>=640){

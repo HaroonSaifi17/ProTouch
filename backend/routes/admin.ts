@@ -3,6 +3,9 @@ import ServiceModel from "./../models/services";
 const router = express.Router();
 import multer from "multer";
 import ProductModel from "../models/product";
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
+
 
 const storage = multer.diskStorage({
   destination: function (
@@ -73,4 +76,17 @@ router.post(
   },
 );
 
+router.post(
+  '/login',
+  passport.authenticate('local',{session:false}),(req:Request,res:Response)=>{
+   try {
+      const token = jwt.sign({username: process.env.ADMIN_USERNAME },process.env.JWT_ADMIN_SECRET,{
+      expiresIn: '10h' 
+    })
+      res.send({adminToken:token}).end();
+   } catch (error) {
+    res.status(401).send(error).end()
+   }
+  }
+)
 export default router;

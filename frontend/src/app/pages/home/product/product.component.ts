@@ -13,38 +13,44 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './product.component.css',
 })
 export class ProductComponent implements OnInit {
-  private cartItems: { name: string; price: number,id:string }[] = [];
+  productId!: string | null;
   products$:
-    | Observable<
-        [
+    | Observable<{
+        name: string;
+        products: [
           {
             name: string;
             description: string;
             img: string;
             price: string;
-            _id:string;
-          },
-        ]
-      >
+            _id: string;
+          }
+        ];
+      }>
     | undefined;
 
   apiUrl = environment.apiUrl;
-  constructor(
-    private route: ActivatedRoute,
-    private api: ApiService,
-  ) {
-    const storedCart = localStorage.getItem('cart');
-    this.cartItems = storedCart ? JSON.parse(storedCart) : [];
-  }
+  constructor(private route: ActivatedRoute, private api: ApiService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
+      this.productId = id;
       this.products$ = this.api.getProduct(id!);
     });
   }
-  addToCart(name: string, price: number,id:string): void {
-    this.cartItems.push({ name, price,id });
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+  addToCart(
+    name: string,
+    price: string,
+    id: string,
+    ff: HTMLAnchorElement,
+    pname:string
+  ): void {
+    if (ff.innerText == 'Add to Cart') {
+      const pid = this.productId;
+      this.api.updateArray({ name, price, id, pid,pname });
+      ff.innerText = 'Successfully Added';
+      ff.style.background = 'gray';
+    }
   }
 }
