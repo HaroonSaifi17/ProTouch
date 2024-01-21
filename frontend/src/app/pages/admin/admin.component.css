@@ -1,0 +1,8 @@
+.active {
+  font-weight: 600;
+}
+.active1 > i,
+.active1 > div {
+  border-radius: 1000px;
+  background: #a78bfa;
+}

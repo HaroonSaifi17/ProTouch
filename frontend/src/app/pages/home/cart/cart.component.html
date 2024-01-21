@@ -1,27 +1,40 @@
 <div class="w-[100vw]">
   <div class="px-[5vw] mx-auto py-8 max-w-screen-2xl">
-    <h3 class="text-center text-red-700 my-5">{{BookedMsg}}</h3>
+    <h3 class="text-center text-red-700 my-5">{{ BookedMsg }}</h3>
     <h3 class="py-5 font-semibold text-4xl">Your Cart</h3>
-    <div *ngIf="cart!.length==0" class="p-5 mt-5 text-2xl text-gray-500 text-center">
+    <div
+      *ngIf="cart!.length == 0"
+      class="p-5 mt-5 text-2xl text-gray-500 text-center"
+    >
       Cart is empty
     </div>
-    <div *ngIf="cart!.length!=0" class="p-4 rounded-lg max-w-[600px] mx-auto bg-violet-100">
-      <div class="flex items-end my-3" *ngFor="let c of cart;index as i">
+    <div
+      *ngIf="cart!.length != 0"
+      class="p-4 rounded-lg max-w-[600px] mx-auto bg-violet-100"
+    >
+      <div class="flex items-end my-3" *ngFor="let c of cart; index as i">
         <div class="flex-1">
-          <p class="text-lg font-semibold">{{i+1}}. {{c.pname}}</p>
-       <p class="ml-4">{{c.name}}</p>
+          <p class="text-lg font-semibold">{{ i + 1 }}. {{ c.pname }}</p>
+          <p class="ml-4">{{ c.name }}</p>
         </div>
         <div>
-          <a (click)='removeItem(i)' class="flex justify-end font-semibold " ><span class="p-3 aspect-square1 rounded-full bg-red-600 text-white"><i class="fa-solid fa-minus"></i></span></a>
-          <p>{{c.price}}&#x20b9;</p>
+          <a (click)="removeItem(i)" class="flex justify-end font-semibold"
+            ><span class="p-3 aspect-square1 rounded-full bg-red-600 text-white"
+              ><i class="fa-solid fa-minus"></i></span
+          ></a>
+          <p>{{ c.price }}&#x20b9;</p>
         </div>
       </div>
       <div class="flex my-6 font-semibold text-xl">
         <div class="flex-1">Total Price</div>
-        <div>{{total}}&#x20b9;</div>
+        <div>{{ total }}&#x20b9;</div>
       </div>
       <div class="flex justify-end">
-      <a (click)="appointment=true" class="p-2  text-center   bg-violet-700 hover:bg-violet-600 text-white rounded-md" >Book Appointment</a>
+        <a
+          (click)="appointment = true"
+          class="p-2 text-center bg-violet-700 hover:bg-violet-600 text-white rounded-md"
+          >Book Appointment</a
+        >
       </div>
     </div>
   </div>
@@ -31,12 +44,20 @@
   class="fixed top-0 right-0 w-full h-full flex filter1 justify-center z-50 items-center"
 >
   <div class="p-4 py-8 m-4 rounded-lg bg-gray-100 shadow relative">
-    <a class=" rounded-full bg-red-600 text-white absolute -right-3 h-[35px] w-[35px]  flex justify-center items-center -top-3" (click)="appointment=false"><i class="fa-solid fa-xmark fa-lg "></i></a>
-    <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm" ngNativeValidate>
+    <a
+      class="rounded-full bg-red-600 text-white absolute -right-3 h-[35px] w-[35px] flex justify-center items-center -top-3"
+      (click)="appointment = false"
+      ><i class="fa-solid fa-xmark fa-lg"></i
+    ></a>
+    <form
+      (ngSubmit)="onSubmit(profileForm)"
+      #profileForm="ngForm"
+      ngNativeValidate
+    >
       <h3 class="text-center font-semibold text-2xl">Enter Your Details</h3>
       <p class="mt-4">Name</p>
       <input
-          ngModel
+        ngModel
         type="text"
         required
         class="p-2 border border-gray-300 mt-1 w-full rounded-md"
@@ -45,7 +66,7 @@
       />
       <p class="mt-4">Contact Number</p>
       <input
-          ngModel
+        ngModel
         type="number"
         required
         class="p-2 border border-gray-300 mt-1 w-full rounded-md"
@@ -53,7 +74,7 @@
         placeholder="Number"
       />
       <button
-        class=" rounded-md bg-violet-600 text-white px-4 py-1 mt-5 w-full"
+        class="rounded-md bg-violet-600 text-white px-4 py-1 mt-5 w-full"
         type="submit"
       >
         Book

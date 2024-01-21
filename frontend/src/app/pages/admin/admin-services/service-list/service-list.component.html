@@ -1,0 +1,112 @@
+<div class="p-4 max-sm:pt-[80px] bg-violet-50 rounded-sm min-h-full max-sm:pb-[134px]">
+  <div class="p-4 max-sm:px-0">
+    <div class="flex justify-between gap-4 mb-8">
+
+    <h2 class="font-semibold text-4xl">Services</h2>
+      <div class="flex items-center">
+      <a (click)="popup=true" class="bg-blue-200  text-blue-800 px-3 py-2 rounded-full"><i class="fa-solid fa-plus mr-2"></i>Add</a>
+      </div>
+    </div>
+    <div class="flex justify-center flex-wrap gap-5" *ngIf="services$ | async as services; else loading">
+      <div
+        class="max-md:min-w-[300px] md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl relative overflow-hidden bg-violet-100"
+        *ngFor="let service of services">
+      <a (click)="delete(service._id)" class="text-white  bg-red-700 hover:bg-red-600 absolute right-2 top-2 px-3 py-2 rounded-md"><i class="fa-solid fa-trash mr-2"></i>Delete</a>
+        <img class="aspect-[3/2] object-cover" [src]="apiUrl + '/api/image/' + service.img" alt="" />
+        <div class="p-4 border-t border-gray-300">
+          <p class="text-xl text-black font-semibold">
+            {{ service.name
+            }}<i class="fa-solid ml-2 text-violet-800 fa-chevron-right"></i>
+          </p>
+          <p class="text-violet-800">{{ service.description }}</p>
+          <a (click)="navigateProduct(service._id)"
+            class="w-full py-2 hover:bg-violet-600 rounded-md inline-block text-center mt-3 bg-violet-700 text-white"><i class="fa-solid fa-pen mr-2"></i>Edit
+            Products</a>
+        </div>
+      </div>
+    </div>
+    <ng-template #loading>
+      <div class="flex justify-center flex-wrap gap-5">
+        <div
+          class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border rounded-xl overflow-hidden bg-gray-200">
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div
+          class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border rounded-xl overflow-hidden bg-gray-200">
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div
+          class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border rounded-xl overflow-hidden bg-gray-200">
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+        <div
+          class="max-md:min-w-[300px] w-[300px] h-[450px] max-md:flex-1 border rounded-xl overflow-hidden bg-gray-200">
+          <div class="h-[300px] skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-3 skeleton-loader"></div>
+          <div class="m-4 h-10 rounded-md skeleton-loader"></div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div
+  *ngIf="popup"
+  class="fixed top-0 right-0 w-full h-full flex filter1 justify-center z-50 items-center"
+>
+  <div class="p-4 py-8 m-4 rounded-lg bg-gray-100 shadow relative">
+    <a
+      class="rounded-full bg-red-600 text-white absolute -right-3 h-[35px] w-[35px] flex justify-center items-center -top-3"
+      (click)="popup = false"
+      ><i class="fa-solid fa-xmark fa-lg"></i
+    ></a>
+    <form
+      (ngSubmit)="onSubmit(profileForm,img)"
+      #profileForm="ngForm"
+      ngNativeValidate
+    >
+      <h3 class="text-center font-semibold text-2xl">New Service Details</h3>
+      <p class="mt-4">Title</p>
+      <input
+        ngModel
+        type="text"
+        required
+        class="p-2 border border-gray-300 mt-1 w-full rounded-md"
+        name="name"
+        placeholder="Tile"
+      />
+      <p class="mt-4">Description</p>
+      <textarea
+        ngModel
+        type="text"
+        required
+        class="p-2 border border-gray-300 mt-1 w-full rounded-md"
+        name="description"
+        placeholder="Description"
+      ></textarea>
+      <p class="mt-2">Image</p>
+      <input
+        class="p-2 border border-gray-300 mt-1 w-full rounded-md"
+        type="file" #img name="img" required ngModel>
+      <button
+        class="rounded-md bg-violet-600 text-white px-4 py-1 mt-5 w-full"
+        type="submit"
+      >
+        Add Service
+      </button>
+    </form>
+  </div>
+</div>

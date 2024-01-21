@@ -7,6 +7,11 @@ import { ProductComponent } from './pages/home/product/product.component';
 import { CartComponent } from './pages/home/cart/cart.component';
 import { AdminloginComponent } from './pages/adminlogin/adminlogin.component';
 import { AdminAuthGuard } from './admin-auth.guard';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { AdminServicesComponent } from './pages/admin/admin-services/admin-services.component';
+import { AppointmentComponent } from './pages/admin/appointment/appointment.component';
+import { ServiceListComponent } from './pages/admin/admin-services/service-list/service-list.component';
+import { ProductListComponent } from './pages/admin/admin-services/product-list/product-list.component';
 
 export const routes: Routes = [
   {
@@ -34,7 +39,36 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate:[AdminAuthGuard]
+    canActivate: [AdminAuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'services',
+        component: AdminServicesComponent,
+        children: [
+          {
+            path: '',
+            component: ServiceListComponent,
+          },
+          {
+            path: 'products/:id',
+            component: ProductListComponent,
+          },
+        ],
+      },
+      {
+        path: 'appointments',
+        component: AppointmentComponent,
+      },
+    ],
   },
   {
     path: 'adminlogin',

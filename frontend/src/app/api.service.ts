@@ -36,7 +36,7 @@ export class ApiService {
     this.saveArrayToLocalStorage(newArray);
   }
 
-   saveArrayToLocalStorage(array: any[]): void {
+  saveArrayToLocalStorage(array: any[]): void {
     localStorage.setItem('cart', JSON.stringify(array));
     this.arraySubject.next(array);
     this.arrayLengthSubject?.next(array.length);
@@ -74,7 +74,7 @@ export class ApiService {
         img: string;
         _id: string;
         product: string[];
-      }
+      },
     ]
   > {
     return this.http.get<
@@ -85,7 +85,7 @@ export class ApiService {
           img: string;
           _id: string;
           product: string[];
-        }
+        },
       ]
     >(environment.apiUrl + '/api/getService');
   }
@@ -98,7 +98,7 @@ export class ApiService {
         img: string;
         _id: string;
         price: string;
-      }
+      },
     ];
   }> {
     return this.http.get<{
@@ -110,12 +110,20 @@ export class ApiService {
           img: string;
           _id: string;
           price: string;
-        }
+        },
       ];
     }>(environment.apiUrl + '/api/getProduct/' + id);
   }
-  bookAppointment(data:{name:string,number:number,totalprice:number,orders:string}):Observable<{id:string}>{
-     return this.http.post<{id:string}>(environment.apiUrl + '/api/book',data)
+  bookAppointment(data: {
+    name: string;
+    number: number;
+    totalprice: number;
+    orders: string;
+  }): Observable<{ id: string }> {
+    return this.http.post<{ id: string }>(
+      environment.apiUrl + '/api/book',
+      data,
+    );
   }
   login(data: {
     username: string;
@@ -123,7 +131,18 @@ export class ApiService {
   }): Observable<{ adminToken: string }> {
     return this.http.post<{ adminToken: string }>(
       environment.apiUrl + '/admin/login',
-      data
+      data,
+    );
+  }
+  addService(data: FormData): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      environment.apiUrl + '/admin/addService',
+      data,
+    );
+  }
+  deleteService(id: string): Observable<void> {
+    return this.http.delete<void>(
+      environment.apiUrl + '/admin/deleteService/' + id,
     );
   }
 }

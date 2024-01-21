@@ -1,6 +1,6 @@
-<div class="w-[100vw]">
-  <div class="px-[5vw] mx-auto py-8 max-w-screen-2xl">
-    <a class="p-3 rounded-full bg-violet-200 text-violet-800" routerLink="/services"><i
+<div class="p-4 max-sm:pt-[80px] bg-violet-50 rounded-sm min-h-full max-sm:pb-[134px]">
+  <div class="p-4 max-sm:px-0">
+    <a class="p-3 rounded-full bg-violet-200 text-violet-800" routerLink="/admin/services"><i
         class="fa-solid fa-arrow-left mr-2"></i>Back</a>
     <h3 class="py-5 font-semibold text-4xl"*ngIf="products$ | async as products">{{products.name}} Products</h3>
     <div class="flex justify-center flex-wrap gap-5" *ngIf="products$ | async as products;else loading">
