@@ -15,9 +15,6 @@ export const corsInterceptor: HttpInterceptorFn = (req, next) => {
 return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        window.location.href = '/';
-      }
-      else{
         window.location.href = '/adminlogin';
         localStorage.removeItem('adminToken')
       }
