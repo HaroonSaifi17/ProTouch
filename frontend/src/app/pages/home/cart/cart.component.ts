@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
   }
   getItems() {
     this.cart = this.api.getArray();
+    this.total=0
     this.cart.forEach((items) => {
       this.total = this.total + parseInt(items.price);
     });
