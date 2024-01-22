@@ -2,14 +2,10 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { CorsInterceptor } from './cors.interceptor';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { corsInterceptor } from './cors.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes) ,provideHttpClient(),    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CorsInterceptor,
-      multi: true,
-    },
+  providers: [provideRouter(routes) ,provideHttpClient(withInterceptors([corsInterceptor]))
 ]
 };

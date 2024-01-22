@@ -9,11 +9,11 @@
     </div>
     <div class="flex justify-center flex-wrap gap-5" *ngIf="services$ | async as services; else loading">
       <div
-        class="max-md:min-w-[300px] md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl relative overflow-hidden bg-violet-100"
+        class="max-md:min-w-[300px] flex flex-col justify-between md:max-w-[300px] max-md:flex-1 border border-gray-300 rounded-xl relative overflow-hidden bg-violet-100"
         *ngFor="let service of services">
       <a (click)="delete(service._id)" class="text-white  bg-red-700 hover:bg-red-600 absolute right-2 top-2 px-3 py-2 rounded-md"><i class="fa-solid fa-trash mr-2"></i>Delete</a>
-        <img class="aspect-[3/2] object-cover" [src]="apiUrl + '/api/image/' + service.img" alt="" />
-        <div class="p-4 border-t border-gray-300">
+        <img class="aspect-[3/2] border-b border-gray-300 object-cover" [src]="apiUrl + '/api/image/' + service.img" alt="" />
+        <div class="p-4">
           <p class="text-xl text-black font-semibold">
             {{ service.name
             }}<i class="fa-solid ml-2 text-violet-800 fa-chevron-right"></i>

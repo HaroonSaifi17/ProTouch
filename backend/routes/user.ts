@@ -62,7 +62,8 @@ router.post(
         name:name,
         number:number,
         totalprice:totalprice,
-        items: items
+        items: items,
+        pending:true
       })
       await order.save() 
       res.status(201).json({ id: order._id });

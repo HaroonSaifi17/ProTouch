@@ -4,6 +4,7 @@ interface Order extends Document {
   name: string;
   number: number;
   totalprice: number;
+  pending:boolean;
   items: { name: string; price: string; id: string; pid: string; pname: string }[];
 }
 
@@ -11,6 +12,7 @@ const orderSchema = new Schema<Order>({
   name: { type: String, required: true },
   number: { type: Number, required: true },
   totalprice: { type: Number, required: true },
+  pending:{ type: Boolean, required: true },
   items: { 
     type: [
       {

@@ -1,5 +1,46 @@
 <div class="p-4 max-sm:pt-[80px] bg-violet-50 rounded-sm min-h-full max-sm:pb-[134px]">
   <div class="p-4 max-sm:px-0">
-<p>dashboard works!</p>
+    <h2 class="font-semibold text-2xl">Sales</h2>
+    <div *ngIf="data$ | async as data">
+      <div class="flex mt-4 gap-4 text-center font-semibold">
+        <div class="flex-1 rounded-xl p-4 bg-violet-200 text-violet-800">
+          <p class="text-2xl">
+            {{ totalSales(data) }}
+          </p>
+          <p>Total Revenue</p>
+        </div>
+        <div class="flex-1 rounded-xl p-4 bg-violet-200 text-violet-800">
+          <p class="text-2xl">
+            {{ data.length }}
+          </p>
+          <p>Total Sales</p>
+        </div>
+      </div>
+      <h2 class="font-semibold my-4 text-2xl">Orders</h2>
+      <div class="flex flex-col gap-4">
+        <div *ngFor="let order of data" class="p-4 bg-violet-200 rounded-xl">
+          <p><span class="font-semibold mr-2">Name: </span>{{ order.name }}</p>
+          <p><span class="font-semibold mr-2">Contact: </span>{{ order.number }}</p>
+          <p><span class="font-semibold mr-2">Pending: </span>{{ order.pending }}</p>
+          <p><span class="font-semibold">Order Details: </span></p>
+          <div class="flex items-end my-3 ml-4" *ngFor="let c of order.items; index as i">
+            <div class="flex-1">
+              <p class="text-lg font-semibold">{{ i + 1 }}. {{ c.pname }}</p>
+              <p class="ml-4">{{ c.name }}</p>
+            </div>
+            <div>
+              <p>{{ c.price }}&#x20b9;</p>
+            </div>
+          </div>
+          <div class="flex mt-2 font-semibold">
+            <div class="flex-1">Total Price</div>
+            <div>{{ totalprice(order) }}&#x20b9;</div>
+          </div>
+          <div *ngIf="order.pending" class="flex justify-end mt-2">
+         <a (click)="complete(order._id)" class="bg-violet-800 text-white rounded-md py-2 px-3 hover:bg-violet-700">Mark as Complete</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

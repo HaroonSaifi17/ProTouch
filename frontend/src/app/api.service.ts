@@ -74,7 +74,7 @@ export class ApiService {
         img: string;
         _id: string;
         product: string[];
-      },
+      }
     ]
   > {
     return this.http.get<
@@ -85,7 +85,7 @@ export class ApiService {
           img: string;
           _id: string;
           product: string[];
-        },
+        }
       ]
     >(environment.apiUrl + '/api/getService');
   }
@@ -98,7 +98,7 @@ export class ApiService {
         img: string;
         _id: string;
         price: string;
-      },
+      }
     ];
   }> {
     return this.http.get<{
@@ -110,7 +110,7 @@ export class ApiService {
           img: string;
           _id: string;
           price: string;
-        },
+        }
       ];
     }>(environment.apiUrl + '/api/getProduct/' + id);
   }
@@ -122,7 +122,7 @@ export class ApiService {
   }): Observable<{ id: string }> {
     return this.http.post<{ id: string }>(
       environment.apiUrl + '/api/book',
-      data,
+      data
     );
   }
   login(data: {
@@ -131,18 +131,69 @@ export class ApiService {
   }): Observable<{ adminToken: string }> {
     return this.http.post<{ adminToken: string }>(
       environment.apiUrl + '/admin/login',
-      data,
+      data
     );
   }
   addService(data: FormData): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(
       environment.apiUrl + '/admin/addService',
-      data,
+      data
+    );
+  }
+  addProduct(data: FormData): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      environment.apiUrl + '/admin/addProduct',
+      data
     );
   }
   deleteService(id: string): Observable<void> {
     return this.http.delete<void>(
-      environment.apiUrl + '/admin/deleteService/' + id,
+      environment.apiUrl + '/admin/deleteService/' + id
     );
+  }
+  deleteProduct(pid: string, sid: string): Observable<void> {
+    const url = `${environment.apiUrl}/admin/deleteProduct/?pid=${pid}&sid=${sid}`;
+    return this.http.delete<void>(url);
+  }
+  dashboard(): Observable<
+    [
+      {
+        _id: string;
+        name: string;
+        number: number;
+        totalprice: number;
+        pending: boolean;
+        items: {
+          name: string;
+          price: string;
+          id: string;
+          pid: string;
+          pname: string;
+        }[];
+      }
+    ]
+  > {
+    return this.http.get<
+      [
+        {
+          _id: string;
+          name: string;
+          number: number;
+          totalprice: number;
+          pending: boolean;
+          items: {
+            name: string;
+            price: string;
+            id: string;
+            pid: string;
+            pname: string;
+          }[];
+        }
+      ]
+    >(environment.apiUrl + '/admin/dashboard');
+  }
+
+  complete(id:string): Observable<void> {
+    return this.http.get<void>(environment.apiUrl + '/admin/completeOrder/' + id);
   }
 }

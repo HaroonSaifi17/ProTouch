@@ -9,7 +9,6 @@ import { AdminloginComponent } from './pages/adminlogin/adminlogin.component';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { AdminServicesComponent } from './pages/admin/admin-services/admin-services.component';
-import { AppointmentComponent } from './pages/admin/appointment/appointment.component';
 import { ServiceListComponent } from './pages/admin/admin-services/service-list/service-list.component';
 import { ProductListComponent } from './pages/admin/admin-services/product-list/product-list.component';
 
@@ -63,10 +62,6 @@ export const routes: Routes = [
             component: ProductListComponent,
           },
         ],
-      },
-      {
-        path: 'appointments',
-        component: AppointmentComponent,
       },
     ],
   },
