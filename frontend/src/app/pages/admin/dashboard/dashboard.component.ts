@@ -55,7 +55,10 @@ export class DashboardComponent implements OnInit {
   ): number {
     let price=0
     data.forEach(item=>{
+      if(item.pending==false){
+
       price=price+item.totalprice
+      }
     })
     return price;
   }
